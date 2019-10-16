@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      body {
+        font-size: 35px;
+      }
+      a {
+        color: #000000;
+        text-decoration: none;
+      }
+      nav > ul {
+        display: flex;
+        padding: 0;
+        margin: 0;
+      }
+      nav > ul li {
+        position: relative;
+        list-style: none;
+        outline: 1px solid #0c3370;
+        background-color: #aabfe0;
+      }
+      .link-item > ul {
+        padding: 0;
+        margin: 0;
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        list-style: none;
+      }
+      .link-item:hover > ul {
+        display: block;
+      }
+    </style>
+    <title>My Menu With JS!</title>
+  </head>
+  <body>	
+    <script>
+	
+	  const arr = [		
+			  {
+			    tagClass: "link-item",
+				text: "menu # 1",
+				items: [
+				  {
+				    tagClass: "link-item-sub",
+				    linkText: "link - 1"
+				  },
+				  {
+				    tagClass: "link-item-sub",
+				    linkText: "link - 2"
+				  },
+				  {
+				    tagClass: "link-item-sub",
+				    linkText: "link - 3"
+				  }				
+			    ]
+			  },
+			  {
+				tagClass: "link-item",
+				text: "menu # 2",
+			    items: [
+				  {
+				    tagClass: "link-item-sub",
+				    linkText: "link - 1"
+				  },
+				  {
+				    tagClass: "link-item-sub",
+				    linkText: "link - 2"
+				  },
+				  {
+				    tagClass: "link-item-sub",
+				    linkText: "link - 3"
+				  }				
+			    ]
+			  },
+			  {
+			    tagClass: "link-item",
+				text: "menu # 3",
+				items: [
+				  {
+				    tagClass: "link-item-sub",
+				    linkText: "link - 1"
+				  },
+				  {
+				    tagClass: "link-item-sub",
+				    linkText: "link - 2"
+				  },
+				  {
+				    tagClass: "link-item-sub",
+				    linkText: "link - 3"
+				  }				
+			    ]
+			  }
+	      ];
+		
+      
+	  const $nav = document.createElement('nav');	  
+	  document.body.prepend($nav);	  
+	  
+	  const renderHtml = function(arr, where) {	
+	    const $ul = document.createElement('ul');		
+		arr.forEach(elem => {
+		  const $li = document.createElement('li');
+		  $li.classList.add(elem.tagClass);
+		  if(elem.text) {
+		    $li.innerText = elem.text;
+		  };
+		  if(elem.linkText) {	
+		  	const $link = document.createElement('a');
+		  	$link.href = '#';
+		  	$link.append(elem.linkText);
+		  	$li.append($link);
+		  };
+		  if(elem.items) {
+		    renderHtml(elem.items, $li)
+		  };
+		  $ul.append($li);		  
+		});
+	    where.append($ul);
+	  }
+	renderHtml(arr, $nav);
+      
+    </script>
+  </body>
+</html>
